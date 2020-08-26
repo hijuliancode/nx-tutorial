@@ -1,13 +1,12 @@
-import { getGreeting } from '../support/app.po';
+import { getAddTodoButton, getTodos } from '../support/app.po';
 
-describe('nx-tutorial', () => {
+describe('TodoApps', () => {
   beforeEach(() => cy.visit('/'));
 
-  it('should display welcome message', () => {
-    // Custom command example, see `../support/commands.ts` file
-    cy.login('my-email@something.com', 'myPassword');
+  it('should display todos', () => {
+    getTodos().should((t) => expect(t.length).equal(2));
+    getAddTodoButton().click();
+    getTodos().should((t) => expect(t.length).equal(3));
+  })
 
-    // Function helper example, see `../support/app.po.ts` file
-    getGreeting().contains('Welcome to nx-tutorial!');
-  });
-});
+})
