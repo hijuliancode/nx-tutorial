@@ -1,0 +1,176 @@
+{
+  "version": 1,
+  "projects": {
+    "nx-tutorial": {
+      "projectType": "application",
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "apps/nx-tutorial",
+      "sourceRoot": "apps/nx-tutorial/src",
+      "prefix": "nx-tutorial",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/nx-tutorial",
+            "index": "apps/nx-tutorial/src/index.html",
+            "main": "apps/nx-tutorial/src/main.ts",
+            "polyfills": "apps/nx-tutorial/src/polyfills.ts",
+            "tsConfig": "apps/nx-tutorial/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "apps/nx-tutorial/src/favicon.ico",
+              "apps/nx-tutorial/src/assets"
+            ],
+            "styles": ["apps/nx-tutorial/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/nx-tutorial/src/environments/environment.ts",
+                  "with": "apps/nx-tutorial/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "nx-tutorial:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "nx-tutorial:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "nx-tutorial:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/nx-tutorial/tsconfig.app.json",
+              "apps/nx-tutorial/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/nx-tutorial/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/nx-tutorial/jest.config.js",
+            "tsConfig": "apps/nx-tutorial/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "apps/nx-tutorial/src/test-setup.ts"
+          }
+        }
+      }
+    },
+    "nx-tutorial-e2e": {
+      "root": "apps/nx-tutorial-e2e",
+      "sourceRoot": "apps/nx-tutorial-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/nx-tutorial-e2e/cypress.json",
+            "tsConfig": "apps/nx-tutorial-e2e/tsconfig.e2e.json",
+            "devServerTarget": "nx-tutorial:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "nx-tutorial:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["apps/nx-tutorial-e2e/tsconfig.e2e.json"],
+            "exclude": ["**/node_modules/**", "!apps/nx-tutorial-e2e/**/*"]
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/angular",
+    "analytics": "10313b6c-d60a-44ad-82eb-bd3531395c93"
+  },
+  "schematics": {
+    "@nrwl/workspace": {
+      "library": {
+        "linter": "tslint"
+      }
+    },
+    "@nrwl/cypress": {
+      "cypress-project": {
+        "linter": "tslint"
+      }
+    },
+    "@nrwl/node": {
+      "application": {
+        "linter": "tslint"
+      },
+      "library": {
+        "linter": "tslint"
+      }
+    },
+    "@nrwl/nest": {
+      "application": {
+        "linter": "tslint"
+      },
+      "library": {
+        "linter": "tslint"
+      }
+    },
+    "@nrwl/express": {
+      "application": {
+        "linter": "tslint"
+      },
+      "library": {
+        "linter": "tslint"
+      }
+    },
+    "@nrwl/angular:application": {
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "unitTestRunner": "jest"
+    }
+  },
+  "defaultProject": "nx-tutorial"
+}
