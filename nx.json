@@ -28,6 +28,9 @@
     "nx-tutorial-e2e": {
       "tags": [],
       "implicitDependencies": ["nx-tutorial"]
+    },
+    "api": {
+      "tags": []
     }
   }
 }
