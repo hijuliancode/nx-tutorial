@@ -8,7 +8,7 @@ import { Todo } from "@nx-tutorial/data";
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  title: string = 'Todos'
+  title: 'Todos';
   todos: Todo[] = [];
 
   constructor(private http: HttpClient) {

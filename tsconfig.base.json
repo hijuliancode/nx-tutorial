@@ -16,7 +16,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@nx-tutorial/data": ["libs/data/src/index.ts"]
+      "@nx-tutorial/data": ["libs/data/src/index.ts"],
+      "@nx-tutorial/ui": ["libs/ui/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
